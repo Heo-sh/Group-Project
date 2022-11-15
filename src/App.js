@@ -1,11 +1,17 @@
 /*global kakao*/
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import "./App.css";
 //test
 const SearchData = [
   { routeName: "경부선", direction: ["부산", "서울"] },
   { routeName: "남해선", direction: ["부산", "순천"] },
+  { routeName: "무안광주선", direction: ["대구", "무안"] },
+  { routeName: "광주대구선", direction: ["대구", "순천"] },
+  { routeName: "서해안선", direction: ["목포", "시흥"] },
+  { routeName: "완주장수선", direction: ["익산", "포항"] },
+  { routeName: "대구포항선", direction: ["익산", "포항"] },
+  { routeName: "호남선", direction: ["논산", "순천"] },
 ];
 
 function App() {
@@ -38,23 +44,14 @@ function App() {
     }
   });
 
-  console.log(arr);
+  // console.log(arr);
 
   return (
     <div className="App">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          setSubmitKey(keyword);
-        }}
-      >
-        <input
-          type="text"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-        ></input>
-        <input type="submit"></input>
-      </form>
+      <div>
+        <h1>Search Oil</h1> 
+      </div>
+      <div className="Direction">
       {SearchData.map((item) => (
         <button
           onClick={() => {
@@ -65,6 +62,23 @@ function App() {
           {item.routeName}
         </button>
       ))}
+      </div>
+      <hr></hr>
+      <div className="Search">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            setSubmitKey(keyword);
+          }}
+        >
+          <input
+            type="text"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          ></input>
+          <input type="submit"></input>
+        </form>
+      </div>
       <hr />
       {direc.map((item) => (
         <button
@@ -89,7 +103,7 @@ function App() {
             key={index}
             onClick={() => setOliName(item.serviceAreaName)}
           >
-            {item.serviceAreaName}, diselPrice: {item.diselPrice}
+            {item.serviceAreaName}
           </a>
         </li>
       ))}
