@@ -1,15 +1,25 @@
-body {
-  background-color: aqua;
+.App {
+  margin: 60px;
+  border: 1px dashed;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 .Direction {
+  height: 80px;
+  /* border: 1px dashed; */
   display: grid;
-  grid-gap: 1px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  flex-wrap: wrap;
 }
 .Search {
-  display: flex;
-  justify-content: space-around;
+  align-self: center;
+  justify-self: center;
 }
-a {
-  text-decoration: none;
+.leftButton {
+  justify-self: end;
+}
+.List {
+  margin: 20px;
+  height: 500px;
+  overflow-y: auto;
 }

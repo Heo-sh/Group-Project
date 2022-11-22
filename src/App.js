@@ -48,40 +48,66 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <h1>Search Oil</h1> 
-      </div>
       <div className="Direction">
       {SearchData.map((item) => (
         <button
+          className="DirectionChoice"
           onClick={() => {
             setDirec(item.direction);
             setRoute(item.routeName);
+          }}
+          style={{
+            backgroundColor:"aqua",
+            margin:"1px",
+            fontSize:"x-small",
+            borderStyle:"none",
+            borderRadius:"25%",
+            color:"blue",
           }}
         >
           {item.routeName}
         </button>
       ))}
       </div>
-      <hr></hr>
       <div className="Search">
         <form
           onSubmit={(e) => {
             e.preventDefault();
             setSubmitKey(keyword);
           }}
+          style={{
+            alignItems:"center"
+          }}
         >
           <input
             type="text"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
+            placeholder="주유소 검색"
+            style={{
+              margin:"5px",
+              height:"20px",
+              textAlign:"center"
+            }}
           ></input>
-          <input type="submit"></input>
+          <input
+            type="submit"
+            value={"검색"}
+            style={{
+              height:"25px",
+            }}
+          >
+          </input>
         </form>
       </div>
-      <hr />
       {direc.map((item) => (
         <button
+        style={{
+          margin:"5px",
+          padding:"5px",
+          width:"20%",
+          justifySelf:"center"
+        }}
           onClick={() => {
             setSelDirect(item);
           }}
@@ -89,24 +115,30 @@ function App() {
           {item}
         </button>
       ))}
-      <p>{selDirect}</p>
-      <p>{submitKey}</p>
 
-      <hr />
-      <button onClick={() => setPage((num) => num - 1)}>&lt;</button>
-      <button onClick={() => setPage((num) => num + 1)}>&gt;</button>
-      <hr />
-      {arr.map((item, index) => (
-        <li>
-          <a
-            href="#"
-            key={index}
-            onClick={() => setOliName(item.serviceAreaName)}
-          >
-            {item.serviceAreaName}
-          </a>
-        </li>
-      ))}
+
+      <div className="List">
+        {arr.map((item, index) => (
+          <li>
+            <a
+              href="#"
+              key={index}
+              onClick={() => setOliName(item.serviceAreaName)}
+            >
+              {item.serviceAreaName}
+            </a>
+          </li>
+        ))}
+      </div>
+      
+      <div></div>
+
+      <div className="leftButton">
+        <button onClick={() => setPage((num) => num - 1)}>&lt;</button>
+      </div>
+      <div className="rightButton">
+        <button onClick={() => setPage((num) => num + 1)}>&gt;</button>
+      </div>
       <Kakaomap submitKey={oliName} />
     </div>
   );
@@ -158,9 +190,10 @@ function Kakaomap({ submitKey }) {
       }}
       style={{
         width: "100%",
-        height: "350px",
+        height: "250px",
+        gridColumn:"1 / span 2"
       }}
-      level={2}
+      level={4}
       onCreate={setMap}
     >
       {markers.map((marker) => (
